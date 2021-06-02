@@ -1,7 +1,15 @@
+import 'package:auction_/providers/Auth.dart';
+import 'package:auction_/screens/Auction_items.dart';
 import 'package:auction_/screens/auth_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(MyApp());
 }
 
@@ -12,18 +20,24 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Auction App',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: AuthScreen(),
+      home: ChangeNotifierProvider(
+          create: (context) => Auth(),
+          child: StreamBuilder(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (context, snapshot) {
+                final provider = Provider.of<Auth>(context);
+
+                if (provider.isSigningIn) {
+                  return buildLoading();
+                } else if (snapshot.hasData) {
+                  return AuctionItems();
+                } else
+                  return AuthScreen();
+              })),
     );
   }
+
+  Widget buildLoading() => Center(child: CircularProgressIndicator());
 }
