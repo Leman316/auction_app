@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -23,7 +24,7 @@ class Auth with ChangeNotifier {
   Future login() async {
     isSigningIn = true;
 
-    print('t');
+    //  print('t');
 
     final user = await googleSignIn.signIn();
     if (user == null) {
@@ -41,6 +42,31 @@ class Auth with ChangeNotifier {
 
       isSigningIn = false;
     }
+  }
+
+  int getitemcount() {
+    var count = 0;
+    CollectionReference ref = FirebaseFirestore.instance.collection('Items');
+    ref.get().then((QuerySnapshot snapshot) {
+      snapshot.docs.forEach((element) {
+        print(element.data());
+        count++;
+      });
+    });
+    return count;
+  }
+
+  Future<void> addItems(Map<String, String> item) async {
+    print(item['name']);
+    CollectionReference ref = FirebaseFirestore.instance.collection('Items');
+
+    ref.add({
+      'name': item['name'],
+      'description': item['description'],
+      'created': item['created'],
+      'enddate': item['end'],
+      'price': item['minBidPrice']
+    });
   }
 
   void logout() async {

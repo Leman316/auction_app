@@ -1,5 +1,6 @@
 import 'package:auction_/providers/Auth.dart';
 import 'package:auction_/screens/Auction_items.dart';
+import 'package:auction_/screens/add_auction_item.dart';
 import 'package:auction_/screens/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,25 +19,26 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Auction App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: ChangeNotifierProvider(
-          create: (context) => Auth(),
-          child: StreamBuilder(
-              stream: FirebaseAuth.instance.authStateChanges(),
-              builder: (context, snapshot) {
-                final provider = Provider.of<Auth>(context);
+        title: 'Auction App',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: ChangeNotifierProvider(
+            create: (context) => Auth(),
+            child: StreamBuilder(
+                stream: FirebaseAuth.instance.authStateChanges(),
+                builder: (context, snapshot) {
+                  //  final provider = Provider.of<Auth>(context);
 
-                if (provider.isSigningIn) {
-                  return buildLoading();
-                } else if (snapshot.hasData) {
-                  return AuctionItems();
-                } else
-                  return AuthScreen();
-              })),
-    );
+                  if (snapshot.hasData) {
+                    return AuctionItems();
+                  } else
+                    return AuctionItems();
+                  //   return AuthScreen();
+                })),
+        routes: {
+          AddAuctionItem.routeName: (ctx) => AddAuctionItem(),
+        });
   }
 
   Widget buildLoading() => Center(child: CircularProgressIndicator());
