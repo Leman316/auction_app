@@ -1,4 +1,5 @@
 import 'package:auction_/providers/Auth.dart';
+import 'package:auction_/screens/Auction_item_screen.dart';
 import 'package:auction_/screens/Auction_items.dart';
 import 'package:auction_/screens/add_auction_item.dart';
 import 'package:auction_/screens/auth_screen.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
                 })),
         routes: {
           AddAuctionItem.routeName: (ctx) => AddAuctionItem(),
+          AuctionItemlist.routeName: (ctx) => AuctionItemlist()
         });
   }
 

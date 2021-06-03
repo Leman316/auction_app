@@ -10,6 +10,12 @@ class Auth with ChangeNotifier {
   final googleSignIn = GoogleSignIn();
   bool _isSigningIn;
 
+  List data = [];
+
+  List get datas {
+    return [...data];
+  }
+
   GoogleSignInProvider() {
     _isSigningIn = false;
   }
@@ -44,16 +50,22 @@ class Auth with ChangeNotifier {
     }
   }
 
-  int getitemcount() {
+  List getitemcount() {
     var count = 0;
+    data = [];
     CollectionReference ref = FirebaseFirestore.instance.collection('Items');
     ref.get().then((QuerySnapshot snapshot) {
       snapshot.docs.forEach((element) {
         print(element.data());
+        data.add(element.data());
+
         count++;
+
+        //   print(count);
       });
     });
-    return count;
+    // print(count);
+    return data;
   }
 
   Future<void> addItems(Map<String, String> item) async {
