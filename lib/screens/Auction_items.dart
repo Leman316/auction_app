@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AuctionItems extends StatefulWidget {
+  static const routeName = '/aucitem';
   @override
   _AuctionItemsState createState() => _AuctionItemsState();
 }

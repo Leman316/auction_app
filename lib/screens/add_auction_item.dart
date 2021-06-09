@@ -1,5 +1,6 @@
 import 'package:auction_/providers/Auth.dart';
 import 'package:auction_/providers/auction_items.dart';
+import 'package:auction_/screens/Auction_items.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -23,6 +24,16 @@ class _AddAuctionItemState extends State<AddAuctionItem> {
   DateTime _created;
   DateTime _endTime;
   Image _productImage;
+
+  final nameController = TextEditingController();
+  final detailsController = TextEditingController();
+  final priceController = TextEditingController();
+
+  cleartext() {
+    nameController.clear();
+    detailsController.clear();
+    priceController.clear();
+  }
 
   var _initvalue = {
     'name': '',
@@ -51,6 +62,7 @@ class _AddAuctionItemState extends State<AddAuctionItem> {
     print(_initvalue);
 
     Provider.of<Auth>(context, listen: false).addItems(_initvalue);
+    cleartext();
 
     //Navigator.of(context).pop();
   }
@@ -80,6 +92,7 @@ class _AddAuctionItemState extends State<AddAuctionItem> {
                     TextFormField(
                       decoration: InputDecoration(labelText: 'Name'),
                       maxLength: 10,
+                      controller: nameController,
                       validator: (String value) {
                         if (value.isEmpty) {
                           return 'Name is Required';
@@ -94,6 +107,7 @@ class _AddAuctionItemState extends State<AddAuctionItem> {
                     TextFormField(
                       decoration: InputDecoration(labelText: 'Details'),
                       maxLength: 30,
+                      controller: detailsController,
                       validator: (String value) {
                         if (value.isEmpty) {
                           return 'enter description';
@@ -110,6 +124,7 @@ class _AddAuctionItemState extends State<AddAuctionItem> {
                         labelText: 'Price',
                       ),
                       keyboardType: TextInputType.number,
+                      controller: priceController,
                       //textInputAction: TextInputAction.next,
                       validator: (value) {
                         if (value.isEmpty) {

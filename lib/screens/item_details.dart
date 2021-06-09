@@ -60,7 +60,31 @@ class ItemDetails extends StatelessWidget {
                   ]),
             ),
             SizedBox(
-              height: 50,
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Container(
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      'Item created/uploaded by :',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                    Text(item['email'],
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ))
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,

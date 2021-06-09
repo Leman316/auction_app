@@ -71,13 +71,16 @@ class Auth with ChangeNotifier {
   Future<void> addItems(Map<String, String> item) async {
     print(item['name']);
     CollectionReference ref = FirebaseFirestore.instance.collection('Items');
+    String user = FirebaseAuth.instance.currentUser.email;
+    print(user);
 
     ref.add({
       'name': item['name'],
       'description': item['description'],
       'created': item['created'],
       'enddate': item['end'],
-      'price': item['minBidPrice']
+      'price': item['minBidPrice'],
+      'email': user,
     });
   }
 

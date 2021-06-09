@@ -39,9 +39,8 @@ class MyApp extends StatelessWidget {
                 })),
         routes: {
           AddAuctionItem.routeName: (ctx) => AddAuctionItem(),
-          AuctionItemlist.routeName: (ctx) => AuctionItemlist()
+          AuctionItemlist.routeName: (ctx) => AuctionItemlist(),
+          AuctionItems.routeName: (ctx) => AuctionItems(),
         });
   }
-
-  Widget buildLoading() => Center(child: CircularProgressIndicator());
 }
