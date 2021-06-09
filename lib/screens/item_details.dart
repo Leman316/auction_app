@@ -74,11 +74,13 @@ class ItemDetails extends StatelessWidget {
                         fontWeight: FontWeight.normal,
                       ),
                     ),
-                    Text(item['email'],
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ))
+                    item['email'] == null
+                        ? Text('No email Found')
+                        : Text(item['email'],
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ))
                   ],
                 ),
               ),
