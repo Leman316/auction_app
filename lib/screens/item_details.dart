@@ -3,7 +3,6 @@ import 'package:auction_/screens/Auction_item_screen.dart';
 import 'package:auction_/screens/add_auction_item.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
 class ItemDetails extends StatelessWidget {
   final Map<String, dynamic> item;
@@ -12,6 +11,19 @@ class ItemDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //  DateTime end = DateFormat.yMEd().parse(item['enddate']);
+    //  print(DateFormat('dd-MM-yyyy').format(DateTime.now()));
+
+    String enddate = DateFormat('dd-MM-yyyy').format(DateFormat.yMd('en_US').parse(
+        '${item['enddate'].substring(5, 7)}/${item['enddate'].substring(8, 10)}/${item['enddate'].substring(0, 4)}'));
+
+    //print(DateFormat('dd-MM-yyyy').);
+
+    bool datefinished = DateTime.now().isAfter(DateTime(
+        int.parse(item['enddate'].substring(0, 4)),
+        int.parse(item['enddate'].substring(5, 7)),
+        int.parse(item['enddate'].substring(8, 10))));
+
+    // print();
     return Scaffold(
         appBar: AppBar(
           title: Text('Auction Item Detail'),
@@ -55,7 +67,7 @@ class ItemDetails extends StatelessWidget {
                     ),
                     Column(children: <Widget>[
                       Text('Current Bid is : \$ ${item['price']}'),
-                      Text('End date : ${item['enddate']}'),
+                      Text('End date : $enddate'),
                     ])
                   ]),
             ),
@@ -88,22 +100,30 @@ class ItemDetails extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Text(
-                  'Change bid amount',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
+            !datefinished
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Text(
+                        'Change bid amount',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Container(
+                        width: 100,
+                        child: TextFormField(),
+                      )
+                    ],
+                  )
+                : Text(
+                    'Final bid date has expired, Can\'t bid anymore',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Container(
-                  width: 100,
-                  child: TextFormField(),
-                )
-              ],
-            ),
             TextButton(onPressed: () {}, child: Text('Enter'))
           ],
         ));

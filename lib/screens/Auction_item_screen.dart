@@ -9,8 +9,8 @@ class AuctionItemlist extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final prov = Provider.of<Auth>(context, listen: false).datas;
-    print('a $prov');
-    print(prov.length);
+    // print('a $prov');
+    //  print(prov.length);
     return Scaffold(
 
         // body: ListView.builder(itemCount: prov., itemBuilder: itemBuilder);

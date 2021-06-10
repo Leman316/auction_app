@@ -59,7 +59,7 @@ class _AddAuctionItemState extends State<AddAuctionItem> {
       'end': _endTime.toString(),
     };
 
-    print(_initvalue);
+    //   print(_initvalue);
 
     Provider.of<Auth>(context, listen: false).addItems(_initvalue);
     cleartext();
