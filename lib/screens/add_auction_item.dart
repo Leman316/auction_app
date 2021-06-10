@@ -71,7 +71,7 @@ class _AddAuctionItemState extends State<AddAuctionItem> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Added Products'),
+        title: Text('Add new Products'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.save),

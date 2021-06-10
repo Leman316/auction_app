@@ -19,9 +19,9 @@ class _AuctionItemsState extends State<AuctionItems> {
 
     //  Provider.of<Auth>(context, listen: false).countDocuments();
     // Navigator.of(context).pushNamed(AuctionItemlist.routeName);
-    print(a);
+    // print(a);
     setState(() {
-      _showData = !_showData;
+      _showData = true;
     });
   }
 
@@ -39,7 +39,7 @@ class _AuctionItemsState extends State<AuctionItems> {
         title: Text(' Auction Items Gallery'),
         actions: [
           IconButton(
-            icon: Icon(Icons.minimize),
+            icon: Icon(Icons.list),
             onPressed: () {
               setState(() {
                 _showData = !_showData;
@@ -48,7 +48,7 @@ class _AuctionItemsState extends State<AuctionItems> {
             },
           ),
           IconButton(
-            icon: Icon(Icons.add),
+            icon: !_pagestate ? Icon(Icons.add) : Icon(Icons.minimize),
             onPressed: () {
               setState(() {
                 _pagestate = !_pagestate;
@@ -61,8 +61,8 @@ class _AuctionItemsState extends State<AuctionItems> {
       body: Center(
           child: _pagestate
               ? AddAuctionItem()
-              : _showData
-                  ? ElevatedButton(onPressed: _check, child: Text('Check Data'))
+              : !_showData
+                  ? Container()
                   : AuctionItemlist()),
     );
   }

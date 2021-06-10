@@ -17,7 +17,12 @@ class AuctionItemlist extends StatelessWidget {
         body: ListView.builder(
       itemCount: prov.length,
       itemBuilder: (context, index) {
-        return ListViewItem(prov[index]);
+        return SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: ListViewItem(prov[index]),
+          ),
+        );
       },
     ));
   }
@@ -37,34 +42,46 @@ class ListViewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          Text(
-            item['name'],
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            SizedBox(
+              width: MediaQuery.of(context).size.width * .4,
+              child: Text(
+                item['name'],
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
-          ),
-          Text(
-            '\$ ${item['price']}',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+            SizedBox(
+              width: MediaQuery.of(context).size.width * .3,
+              child: Text(
+                '\$ ${item['price']}',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
-          ),
-          TextButton(
-              onPressed: () {
-                _send(context, item);
-              },
-              child: Text('Details',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  )))
-        ],
+            SizedBox(
+              width: MediaQuery.of(context).size.width * .2,
+              child: TextButton(
+                  onPressed: () {
+                    _send(context, item);
+                  },
+                  child: Text('Details',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ))),
+            )
+          ],
+        ),
       ),
     );
   }
