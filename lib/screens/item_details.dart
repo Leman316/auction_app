@@ -16,8 +16,6 @@ class ItemDetails extends StatelessWidget {
     String enddate = DateFormat('dd-MM-yyyy').format(DateFormat.yMd('en_US').parse(
         '${item['enddate'].substring(5, 7)}/${item['enddate'].substring(8, 10)}/${item['enddate'].substring(0, 4)}'));
 
-    //print(DateFormat('dd-MM-yyyy').);
-
     bool datefinished = DateTime.now().isAfter(DateTime(
         int.parse(item['enddate'].substring(0, 4)),
         int.parse(item['enddate'].substring(5, 7)),
