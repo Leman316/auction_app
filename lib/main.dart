@@ -34,8 +34,8 @@ class MyApp extends StatelessWidget {
                   if (snapshot.hasData) {
                     return AuctionItems();
                   } else
-                    return AuctionItems();
-                  //   return AuthScreen();
+                    // return AuctionItems();
+                    return AuthScreen();
                 })),
         routes: {
           AddAuctionItem.routeName: (ctx) => AddAuctionItem(),

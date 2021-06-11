@@ -17,9 +17,6 @@ class _AuctionItemsState extends State<AuctionItems> {
   void _check() {
     List a = Provider.of<Auth>(context, listen: false).getitemcount();
 
-    //  Provider.of<Auth>(context, listen: false).countDocuments();
-    // Navigator.of(context).pushNamed(AuctionItemlist.routeName);
-    // print(a);
     setState(() {
       _showData = true;
     });
